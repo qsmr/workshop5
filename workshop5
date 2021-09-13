@@ -1,0 +1,93 @@
+import random
+#_____________________________________________________________________________________________________________
+#TASK 1 - USER INPUT
+
+def guess_random_number(tries, number):                                        
+    target = random.randint(0, 10)
+    while tries > 0:
+        print(f"Number of tries left: {  tries}")
+        guess = int(input("Guess a number between 0 and 10:   "))
+        tries -= 1
+        if tries == 0:
+            print(f'You have failed to guess the number! {    number}')
+        elif number == guess:
+            print(f"You have guessed the correct number! {    number}")
+            break
+        elif guess > number:
+            print("Guess lower: ")
+        elif guess < number:
+            print("Guess higher: ")
+        else:
+            print(f'You have failed to guess the number! {    number}')
+
+#TEST TASK 1 DRIVER
+#guess_random_number(5, 11)           
+
+#_____________________________________________________________________________________________________________________________
+
+
+#TASK 2 - LINEAR SEARCH
+
+
+def guess_random_num_linear(my_list, target):
+    target = random.randint(0, 10)
+    print(f"The number for the program to guess is {target}")
+    tries = 6
+ 
+    if tries > 0:
+        for x in range(0, 5, 1):
+            tries -=1
+            print(f"Number of tries left: {  tries}")
+            print(f"The program is guessing... {x}")
+            if x == target:
+                print(f"The program has guessed the correct number! {     target}")
+                return x
+                break
+        print(f'The program has failed to guess the number! {    target}')
+        return -1
+      
+    #if tries == 0:
+        #print(f'The program has failed to guess the number! {    target}')      
+#TASK 2 DRIVER      
+#my_list = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+#guess_random_num_linear(5, 11)
+
+
+#________________________________________________________________________________________________________________________________
+
+#TASK 3 - BINARY SEARCH                      
+
+ 
+def guess_random_binary_search(tries, start, stop):
+    target = random.randint(0, 101)
+    my_list = range(0, 101)
+    tries = 5
+    lower_bound = 0
+    upper_bound = len(my_list) - 1
+    print(f"random number to find:{   target}")
+    if tries == 0:
+        print("Your program has failed to find the number!") 
+
+    while lower_bound <= upper_bound:
+        pivot = (lower_bound + upper_bound) // 2
+        pivot_value = my_list[pivot]
+        if pivot_value == target:
+            #print(f"Found it! {   target}")
+            print(f"Found it! {   target}")
+            return pivot
+        elif pivot_value > target:
+            tries -=1
+            #print(f"Guessing lower!...{pivot_value}")   #to see pivot values...not shown in directions, but I wanted to dbl chk
+            print("Guessing lower!...")
+            upper_bound = pivot - 1
+        elif pivot_value != target and tries == 0:
+            print("Your program has failed to guess the number")
+            break
+        else:
+            tries -=1
+            #print(f"Guessing higher!...{pivot_value}")    #to see pivot values...not shown in directions, but I wanted to dbl chk
+            print("Guessing higher!...")                    
+            lower_bound = pivot + 1
+
+#TASK 3 DRIVER 
+#guess_random_binary_search(5, 0, 101)
